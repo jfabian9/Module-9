@@ -1,0 +1,43 @@
+---
+title: "Module 9"
+author: "Jacob Fabian"
+date: "2022-11-05"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+library(lpSolve)
+library(lpSolveAPI)
+```
+
+```{r}
+GP <- read.lp("Module9.lp")
+print(GP)
+```
+
+
+```{r}
+emax_table <- matrix(c("Total Profit", "Employment Level", "Earnings Next Year",
+                       20,6,8,
+                       15,4,7,
+                       25,5,5,
+                       "Maximize","=50",">=75",
+                       "Millions of Dollars", "Hundreds of Employees", "Millions of Dollars"), ncol=6, byrow = F)
+colnames(emax_table) <- c("Factor","Product 1", "Product 2", "Product 3", "Goal", "Units")
+as.table(emax_table)
+```
+
+```{r}
+solve(GP)
+get.objective(GP)
+get.variables(GP)
+```
+
+
+###. 1 In order to maximize the objection funsction, the firm needs to use a combination of X1, X2, and X3. Y1- is 20x1 + 15x2 + 25x3 >= 75 . Y2 is 6x1 + 4x2 +  5x3 = 50. Y3 is 8x1+ 7x2 + 5x3 >= 75 X1 - Product 1, X2- Product 2 and X3 for Product 3 states that Product 1 and Product 2 cannot be produced as intended. Y1+ is employees, Y2- is millions of dollars. 
+
+###. 2 The goal was to maximize profits while stabilizing the employment levels to 50 Hundred Employees. The goal of y2+ and y2- was to capture the increase or decrease in the next years earnings from the current level which states as "0" in this case which indicates that there is no increase or decrease in the earnings of next year when compared to that with the current year. 
+
+###. 3 225 million dollars is final profit.
